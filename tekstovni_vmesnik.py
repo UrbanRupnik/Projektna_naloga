@@ -7,7 +7,9 @@ def izpis_zmage(igra):
     return "ZMAGAL SI!"
 
 def izpis_igre(igra):
-    return igra.narisi_plosco()
+    presledek = "-----------------------------------"
+    igra.narisi_plosco()
+    print(presledek)
 
 def zahtevaj_vnos():
     return input("Izberi stolpec:")
@@ -29,11 +31,11 @@ def pozeni_vmesnik():
 
         rezultat = trenutna_igra.poteza(izbira_stolpca)
 
-    #    if trenutna_igra.zmaga_O():
-    #        print(izpis_zmage(trenutna_igra))
-    #        return #koncas
-    #    if trenutna_igra.zmaga_X():
-    #        print(izpis_poraza(trenutna_igra))
-    #        return #koncas
+        if trenutna_igra.zmaga_O():
+            print(izpis_zmage(trenutna_igra))
+            return #koncas
+        if trenutna_igra.zmaga_X():
+            print(izpis_poraza(trenutna_igra))
+            return #koncas
 
 pozeni_vmesnik()
