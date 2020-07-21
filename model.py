@@ -3,7 +3,6 @@ import random
 #konstante
 ZACETEK = "Z"
 
-NAPACEN_VNOS = "0"
 
 ZMAGA_1 = "W1"
 ZMAGA_2 = "W2"
@@ -32,6 +31,8 @@ class Igra:
 
 
     def simbol_pade_do_konca(self, izbira_stolpca):
+        if int(izbira_stolpca) > 7 or int(izbira_stolpca) < 1: #napacen vnos, izbira se enkrat isti igralec
+            return self.plosca
         a = 0
         nova_vrstica = []
         nova_plosca = []
@@ -42,7 +43,7 @@ class Igra:
             if v < 0:
                 break
         if v < 0:
-            return NAPACEN_VNOS
+            return self.plosca #poln stolpec, izbira se enkrat isti igralec
         elif self.igralec == True:
             self.igralec = False
             for vrstica in self.plosca:

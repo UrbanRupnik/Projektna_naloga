@@ -31,6 +31,8 @@ def pozeni_vmesnik():
 
         rezultat = trenutna_igra.poteza(izbira_stolpca)
 
+        izpis_igre(trenutna_igra)
+
         if trenutna_igra.zmaga_O():
             print(izpis_zmage(trenutna_igra))
             return #koncas
