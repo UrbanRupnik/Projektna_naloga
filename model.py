@@ -15,12 +15,10 @@ VISINA = 6
     
 #plosca je visine 6 in sirine 7
 def def_plosce():
-    plosca = []
     vrstica = []
     for i in range(SIRINA):
-        vrstica.append("")
-    for i in range(VISINA):
-        plosca.append(vrstica)
+        vrstica.append(" ")
+    plosca = [vrstica for j in range(VISINA)]
     return plosca
 
 
@@ -34,19 +32,40 @@ class Igra:
 
 
     def simbol_pade_do_konca(self, izbira_stolpca):
+        a = 0
+        nova_vrstica = []
+        nova_plosca = []
         v = VISINA - 1
         s = int(izbira_stolpca) - 1
-        while self.plosca[v][s] != "":
+        while self.plosca[v][s] != " ":
             v -= 1
+            if v < 0:
+                break
         if v < 0:
             return NAPACEN_VNOS
         elif self.igralec == True:
             self.igralec = False
-            self.plosca[v][s] = "O"
+            for vrstica in self.plosca:
+                if a == v:
+                    for znak in vrstica:
+                        nova_vrstica.append(znak)
+                    nova_vrstica[s] = "O"
+                    vrstica = nova_vrstica
+                nova_plosca.append(vrstica)
+                a += 1
+            self.plosca = nova_plosca
             return self.plosca
         else:
             self.igralec = True
-            self.plosca[v][s] = "X"
+            for vrstica in self.plosca:
+                if a == v:
+                    for znak in vrstica:
+                        nova_vrstica.append(znak)
+                    nova_vrstica[s] = "X"
+                    vrstica = nova_vrstica
+                nova_plosca.append(vrstica)
+                a += 1
+            self.plosca = nova_plosca
             return self.plosca
 
 
@@ -108,7 +127,7 @@ class Igra:
             self.plosca = self.simbol_pade_do_konca(izbira_stolpca)
             return self.plosca
         else:                             #igra racunalnik
-            self.plosca = self.simbol_pade_do_konca(self.poteza_racunalnika())
+            self.plosca = self.simbol_pade_do_konca(izbira_stolpca)
             return self.plosca
 
 
