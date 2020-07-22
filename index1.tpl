@@ -1,4 +1,4 @@
-% rebase("datoteke/views/base.tpl")
+% rebase("base1.tpl")
 <html>
 
 <body>

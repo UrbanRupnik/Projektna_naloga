@@ -123,6 +123,12 @@ class Igra:
                     return True
         return False
 
+    def remi(self):
+        for v in self.plosca:
+            for znak in v:
+                if znak == " ":
+                    return False
+        return True
 
 
     def poteza(self, izbira_stolpca):
@@ -133,7 +139,8 @@ class Igra:
             self.plosca = self.simbol_pade_do_konca(izbira_stolpca)
             return self.plosca
 
-
+    def plosca1(self):
+        return self.plosca
 
     def narisi_plosco(self):
         for v in self.plosca:

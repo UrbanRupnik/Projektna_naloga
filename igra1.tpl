@@ -1,5 +1,4 @@
-<html>
-  % import model
+% import model1
 
   <h1>Štiri v vrsto</h1>
 
@@ -8,27 +7,24 @@
     <p><small>Avtor: <bold>Urban Rupnik</bold></small></p>
   </blockquote>
 
-  <h2> {{ igra.narisi_plosco() }} </h2>
+  <h2> {{ igra.plosca1() }} </h2>
 
-  
+
   % if poskus == "W":
     <h1> ZMAGAL SI </h1>
   % elif poskus == "L":
     <h1> IZGUBIL SI </h1>
     <h2> Več sreče prihodnjič!</h2>
   % else:
-  
 
-  <form action="/igra/{{id_igre}}/" method="post">
-    Izbira stolpca: <input type="text" name="izberi_stolpec">
+  <form action="/igra/" method="post">
+    Izbira stolpca: <input type="text" name="izbira_stolpca">
     <button type="submit">Izberi</button>
   </form>
-
+  
   % end
 
   
-  <form action="/igra/" method="post">
+  <form action="/nova_igra/" method="post">
     <button type="submit">Nova igra</button>
   </form>
-
-</html>

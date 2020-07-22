@@ -1,14 +1,13 @@
 import bottle
 
-import model
+import model1
 
-stiri = model.Stiri()
-trenutna_igra = model.nova_igra()
+stiri = model1.Stiri()
 
 
 @bottle.get("/")
 def index():
-    return bottle.template("datoteke/views/index.tpl")
+    return bottle.template("index1.tpl")
 
 @bottle.post("/igra/")
 def nova_igra():
@@ -20,7 +19,7 @@ def nova_igra():
 def pokazi_igro(id_igre):
     igra, poskus = stiri.igre[id_igre]
 
-    return bottle.template("datoteke/views/igra.tpl", igra=igra, poskus=poskus, id_igre=id_igre)
+    return bottle.template("igra1.tpl", igra=igra, poskus=poskus, id_igre=id_igre)
 
 @bottle.post("/igra/<id_igre:int>/")
 def igranje(id_igre):
