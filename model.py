@@ -5,12 +5,13 @@ import json
 ZACETEK = "Z"
 
 
-ZMAGA_1 = "W1"
-ZMAGA_2 = "W2"
+ZMAGA = "W"
+PORAZ = "L"
 REMI = "R"
 
 SIRINA = 7
 VISINA = 6
+
 
     
 #plosca je visine 6 in sirine 7
@@ -139,6 +140,20 @@ class Igra:
             print(v)
 
 
+    def igranje(self, izbira_stolpca):
+        if self.igralec == True:
+            self.plosca = self.simbol_pade_do_konca(izbira_stolpca)
+            self.narisi_plosco()
+            if self.zmaga_O():
+                return ZMAGA
+        else:
+            izbira_stolpca = self.poteza_racunalnika()
+            self.plosca = self.simbol_pade_do_konca(izbira_stolpca)
+            self.narisi_plosco()
+            if self.zmaga_X():
+                return PORAZ
+
+
 def nova_igra():
     plosca = def_plosce()
     igralec = random.choice([True, False])
@@ -169,12 +184,12 @@ class Stiri:
         # vrnemo nov id
         return nov_id
 
-    def poteza(self, id_igre, izbira_stolpca):
+    def igranje(self, id_igre, izbira_stolpca):
         # dobimo staro igro ven
         trenutna_igra, _ = self.igre[id_igre]
 
         # ugibamo crko, dobimo novo stanje
-        novo_stanje = trenutna_igra.poteza(izbira_stolpca)
+        novo_stanje = trenutna_igra.igranje(izbira_stolpca)
 
         # zapisemo posodbljeno stanje in igro nazaj v "BAZO"
         self.igre[id_igre] = (trenutna_igra, novo_stanje)

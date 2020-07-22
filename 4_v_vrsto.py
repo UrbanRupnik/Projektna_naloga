@@ -18,16 +18,16 @@ def nova_igra():
 
 @bottle.get("/igra/<id_igre:int>/")
 def pokazi_igro(id_igre):
-    igra = stiri.igre[id_igre]
+    igra, poskus = stiri.igre[id_igre]
 
-    return bottle.template("datoteke/views/igra.tpl", igra=igra, id_igre=id_igre)
+    return bottle.template("datoteke/views/igra.tpl", igra=igra, poskus=poskus, id_igre=id_igre)
 
 @bottle.post("/igra/<id_igre:int>/")
-def poteza(id_igre):
+def igranje(id_igre):
     
     izbira_stolpca = bottle.request.forms.getunicode("izbira_stolpca")
 
-    stiri.poteza(id_igre, izbira_stolpca)
+    stiri.igranje(id_igre, izbira_stolpca)
 
     bottle.redirect(f"/igra/{id_igre}/")
 
