@@ -19,7 +19,7 @@ def zahtevaj_vnos():
 
 def pozeni_vmesnik():
     # Naredimo novo igro
-    trenutna_igra = model1.nova_igra()
+    trenutna_igra = model1.nova_igra1()
 
     while True:
         #pokazemo mu stanje

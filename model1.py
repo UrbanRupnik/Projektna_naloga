@@ -139,8 +139,18 @@ class Igra:
             self.plosca = self.simbol_pade_do_konca(izbira_stolpca)
             return self.plosca
 
-    def plosca1(self):
-        return self.plosca
+    def vrstica0(self):
+        return self.plosca[0]
+    def vrstica1(self):
+        return self.plosca[1]
+    def vrstica2(self):
+        return self.plosca[2]    
+    def vrstica3(self):
+        return self.plosca[3]
+    def vrstica4(self):
+        return self.plosca[4]
+    def vrstica5(self):
+        return self.plosca[5]
 
     def narisi_plosco(self):
         for v in self.plosca:
@@ -150,18 +160,20 @@ class Igra:
     def igranje(self, izbira_stolpca):
         if self.igralec == True:
             self.plosca = self.simbol_pade_do_konca(izbira_stolpca)
-            self.narisi_plosco()
             if self.zmaga_O():
                 return ZMAGA
+            if self.remi():
+                return REMI
         else:
             izbira_stolpca = self.poteza_racunalnika()
             self.plosca = self.simbol_pade_do_konca(izbira_stolpca)
-            self.narisi_plosco()
             if self.zmaga_X():
                 return PORAZ
+            if self.remi():
+                return REMI
 
 
-def nova_igra():
+def nova_igra1():
     plosca = def_plosce()
     igralec = random.choice([True, False])
     return Igra(plosca, igralec)
@@ -183,7 +195,7 @@ class Stiri:
         nov_id = self.prosti_id_igre()
 
         # naredimo novo igro
-        sveza_igra = nova_igra()
+        sveza_igra = nova_igra1()
 
         # vse to shranimo v self.igre
         self.igre[nov_id] = sveza_igra, ZACETEK
@@ -195,7 +207,7 @@ class Stiri:
         # dobimo staro igro ven
         trenutna_igra, _ = self.igre[id_igre]
 
-        # ugibamo crko, dobimo novo stanje
+        # igramo, dobimo novo stanje
         novo_stanje = trenutna_igra.igranje(izbira_stolpca)
 
         # zapisemo posodbljeno stanje in igro nazaj v "BAZO"
