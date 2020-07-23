@@ -107,34 +107,71 @@ class Igra:
         if self.skoraj_pos1() != False:
             v = self.skoraj_pos1()[0]
             s = self.skoraj_pos1()[1]
-            if v >= 1 and s >= 1:
-                if self.plosca[v - 1][s - 1] == " " and self.plosca[v][s - 1] != " ":
-                    return s
-                else:
-                    random.randint(1, SIRINA)
-            if v <= 1 and s <= 3:        
-                if self.plosca[v + 3][s + 3] == " " and self.plosca[v + 4][s + 3] != " ":
-                    return s + 4
-                else:
-                    return random.randint(1, SIRINA)
+            if v >= 1 and s >= 1 and self.plosca[v - 1][s - 1] == " " and self.plosca[v][s - 1] != " ":
+                return s
+            if v <= 1 and s <= 3 and self.plosca[v + 3][s + 3] == " " and self.plosca[v + 4][s + 3] != " ":
+                return s + 4
             else:
                 return random.randint(1, SIRINA)
             
         if self.skoraj_pos2() != False:
             v = self.skoraj_pos2()[0]
             s = self.skoraj_pos2()[1]
-            if v >= 1 and s <= 3:
-                if self.plosca[v - 1][s + 3] == " " and self.plosca[v][s + 3] != " ":
+            if v >= 1 and s <= 3 and self.plosca[v - 1][s + 3] == " " and self.plosca[v][s + 3] != " ":
+                return s + 4
+            if v <= 1 and s >= 1 and self.plosca[v + 3][s - 1] == " " and self.plosca[v + 4][s - 1] != " ":
+                return s
+            else:
+                return random.randint(1, SIRINA)
+        
+        if self.skorajX_vod() != False:
+            v = self.skorajX_vod()[0]
+            s = self.skorajX_vod()[1]
+            if v == 5: # prva vrstica
+                if s - 1 >= 0 and self.plosca[v][s - 1] == " ":
+                    return s
+                if  s + 3 <= 6 and self.plosca[v][s + 3] == " ":
                     return s + 4
                 else:
                     return random.randint(1, SIRINA)
-            if v <= 1 and s >= 1:
-                if self.plosca[v + 3][s - 1] == " " and self.plosca[v + 4][s - 1] != " ":
+            if v <= 4:
+                if s - 1 >= 0 and self.plosca[v][s - 1] == " " and self.plosca[v + 1][s - 1] != " ":
                     return s
+                if  s + 3 <= 6 and self.plosca[v][s + 3] == " " and self.plosca[v + 1][s + 3] != " ":
+                    return s + 4
                 else:
                     return random.randint(1, SIRINA)
             else:
                 return random.randint(1, SIRINA)
+
+
+        if self.skorajX_nav() != False:
+            v = self.skorajX_nav()[0]
+            s = self.skorajX_nav()[1]
+            if self.plosca[v - 1][s] == " ":
+                return s + 1
+            else:
+                return random.randint(1, SIRINA)
+
+        if self.skorajX_pos1() != False:
+            v = self.skorajX_pos1()[0]
+            s = self.skorajX_pos1()[1]
+            if v >= 1 and s >= 1 and self.plosca[v - 1][s - 1] == " " and self.plosca[v][s - 1] != " ":
+                return s
+            if v <= 1 and s <= 3 and self.plosca[v + 3][s + 3] == " " and self.plosca[v + 4][s + 3] != " ":
+                return s + 4
+            else:
+                return random.randint(1, SIRINA)
+            
+        if self.skorajX_pos2() != False:
+            v = self.skorajX_pos2()[0]
+            s = self.skorajX_pos2()[1]
+            if v >= 1 and s <= 3 and self.plosca[v - 1][s + 3] == " " and self.plosca[v][s + 3] != " ":
+                return s + 4
+            if v <= 1 and s >= 1 and self.plosca[v + 3][s - 1] == " " and self.plosca[v + 4][s - 1] != " ":
+                    return s
+            else:
+                return random.randint(1, SIRINA)        
         else:
             return random.randint(1, SIRINA)     
                 
@@ -198,6 +235,63 @@ class Igra:
         return False
 
 
+    def skorajX_vod(self): # vodoravno zmaga za X
+        for v in range(VISINA):      # v = vrstica in s = stolpec
+            for s in range(SIRINA - 2):
+                if self.plosca[v][s] == "X" and self.plosca[v][s + 1] == "X" and self.plosca[v][s + 2] == "X":
+                    if self.plosca[v][s - 1] == " " or self.plosca[v][s + 3] == " ":
+                        vod = []
+                        vod.append(v)
+                        vod.append(s)
+                        return vod # skoraj vodoravna zmaga
+        return False
+
+    def skorajX_nav(self):    # navpicno
+        for v in range(VISINA - 2):
+            for s in range(SIRINA):
+                if self.plosca[v][s] == "X" and self.plosca[v + 1][s] == "X" and self.plosca[v + 2][s] == "X":
+                    if self.plosca[v - 1][s] == " ":
+                        nav = []
+                        nav.append(v)
+                        nav.append(s)
+                        return nav # skoraj navpicna zmaga
+        return False
+
+    def skorajX_pos1(self):    # posevno \
+        for v in range(VISINA - 2):
+            for s in range(SIRINA - 2):
+                if self.plosca[v][s] == "X" and self.plosca[v + 1][s + 1] == "X" and self.plosca[v + 2][s + 2] == "X":
+                    if v >= 1 and s >= 1:
+                        if self.plosca[v - 1][s - 1] == " ":
+                            pos1 = []
+                            pos1.append(v)
+                            pos1.append(s)
+                            return pos1
+                    if v <= 2 and s <= 3:   
+                        if self.plosca[v + 3][s + 3]:
+                            pos1 = []
+                            pos1.append(v)
+                            pos1.append(s)
+                            return pos1         
+        return False
+    
+    def skorajX_pos2(self):    # posevno /
+        for v in range(VISINA - 2):
+            for s in reversed(range(SIRINA - 2)):
+                if self.plosca[v][s + 2] == "X" and self.plosca[v + 1][s + 1] == "X" and self.plosca[v + 2][s] == "X":
+                    if v >= 1 and s <= 3:
+                        if self.plosca[v - 1][s + 3] == " ":
+                            pos2 = []
+                            pos2.append(v)
+                            pos2.append(s)
+                            return pos2
+                    if v <= 2 and s >= 1:
+                        if self.plosca[v + 3][s - 1] == " ":
+                            pos2 = []
+                            pos2.append(v)
+                            pos2.append(s)
+                            return pos2
+        return False
 
     def zmaga_O(self):
         # vodoravno
