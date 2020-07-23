@@ -12,8 +12,9 @@ REMI = "R"
 SIRINA = 7
 VISINA = 6
 
+vod = []
+nav = []
 
-    
 #plosca je visine 6 in sirine 7
 def def_plosce():
     vrstica = []
@@ -74,7 +75,56 @@ class Igra:
 
 
     def poteza_racunalnika(self):
-        return random.randint(1, SIRINA)
+        if self.skoraj_vod() != False:
+            v = self.skoraj_vod()[0]
+            s = self.skoraj_vod()[1]
+            if s - 1 >= 0 and self.plosca[v][s - 1] == " ":
+                return s
+            if  s + 3 <= 6 and self.plosca[v][s + 3] == " ":
+                return s + 4
+
+        if self.skoraj_nav() != False:
+            v = self.skoraj_nav()[0]
+            s = self.skoraj_nav()[1]
+            if self.plosca[v - 1][s] == " ":
+                return s + 1
+            else:
+                return random.randint(1, SIRINA)
+        else:
+            return random.randint(1, SIRINA)
+
+    def skoraj_vod(self): # vodoravno
+        for v in range(VISINA):      # v = vrstica in s = stolpec
+            for s in range(SIRINA - 2):
+                if self.plosca[v][s] == "O" and self.plosca[v][s + 1] == "O" and self.plosca[v][s + 2] == "O":
+                    vod = []
+                    vod.append(v)
+                    vod.append(s)
+                    return vod # skoraj vodoravna zmaga
+        return False
+
+    def skoraj_nav(self):    # navpicno
+        for v in range(VISINA - 2):
+            for s in range(SIRINA):
+                if self.plosca[v][s] == "O" and self.plosca[v + 1][s] == "O" and self.plosca[v + 2][s] == "O":
+                    nav = []
+                    nav.append(v)
+                    nav.append(s)
+                    return nav # skoraj navpicna zmaga
+        return False
+
+ #       # posevno /
+ #       for v in range(VISINA - 3):
+ #           for s in range(SIRINA - 3):
+ #               if self.plosca[v][s] == "O" and self.plosca[v + 1][s + 1] == "O" and self.plosca[v + 2][s + 2] == "O":
+ #                   return "skoraj_/"
+ #       # posevno \
+ #       for v in range(VISINA - 3):
+ #           for s in reversed(range(SIRINA - 3)):
+ #               if self.plosca[v][s + 3] == "O" and self.plosca[v + 1][s + 2] == "O" and self.plosca[v + 2][s + 1] == "O":
+ #                   return "skoraj_\\"
+ #       return False
+
 
 
     def zmaga_O(self):
@@ -83,21 +133,25 @@ class Igra:
             for s in range(SIRINA - 3):
                 if self.plosca[v][s] == "O" and self.plosca[v][s + 1] == "O" and self.plosca[v][s + 2] == "O" and self.plosca[v][s + 3] == "O":
                     return True
+
         # navpicno
         for v in range(VISINA - 3):
             for s in range(SIRINA):
                 if self.plosca[v][s] == "O" and self.plosca[v + 1][s] == "O" and self.plosca[v + 2][s] == "O" and self.plosca[v + 3][s] == "O":
                     return True
+
         # posevno /
         for v in range(VISINA - 3):
             for s in range(SIRINA - 3):
                 if self.plosca[v][s] == "O" and self.plosca[v + 1][s + 1] == "O" and self.plosca[v + 2][s + 2] == "O" and self.plosca[v + 3][s + 3] == "O":
                     return True
+
         # posevno \
         for v in range(VISINA - 3):
             for s in reversed(range(SIRINA - 3)):
                 if self.plosca[v][s + 3] == "O" and self.plosca[v + 1][s + 2] == "O" and self.plosca[v + 2][s + 1] == "O" and self.plosca[v + 3][s] == "O":
                     return True
+
         return False
 
     def zmaga_X(self):
