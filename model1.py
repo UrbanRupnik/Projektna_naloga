@@ -106,21 +106,20 @@ class Igra:
         for v in range(VISINA):      # v = vrstica in s = stolpec
             for s in range(SIRINA - 2):
                 if self.plosca[v][s] == "O" and self.plosca[v][s + 1] == "O" and self.plosca[v][s + 2] == "O":
-                    if self.plosca[v][s - 1] == " " or self.plosca[v][s + 3] == " ":
-                        if v == 5: # prva vrstica
-                            if s - 1 >= 0 and self.plosca[v][s - 1] == " ":
-                                return s
-                            if  s + 3 <= 6 and self.plosca[v][s + 3] == " ":
-                                return s + 4
-                            else:
-                                return False
-                        if v <= 4:
-                            if s - 1 >= 0 and self.plosca[v][s - 1] == " " and self.plosca[v + 1][s - 1] != " ":
-                                return s
-                            if  s + 3 <= 6 and self.plosca[v][s + 3] == " " and self.plosca[v + 1][s + 3] != " ":
-                                return s + 4
-                            else:
-                                return False
+                    if v == 5: # prva vrstica
+                        if s - 1 >= 0 and self.plosca[v][s - 1] == " ":
+                            return s
+                        if  s + 3 <= 6 and self.plosca[v][s + 3] == " ":
+                            return s + 4
+                        else:
+                            return False
+                    if v <= 4:
+                        if s - 1 >= 0 and self.plosca[v][s - 1] == " " and self.plosca[v + 1][s - 1] != " ":
+                            return s
+                        if  s + 3 <= 6 and self.plosca[v][s + 3] == " " and self.plosca[v + 1][s + 3] != " ":
+                            return s + 4
+                        else:
+                            return False
         return False
 
     def skoraj_nav(self):    # navpicno
@@ -156,21 +155,20 @@ class Igra:
         for v in range(VISINA):      # v = vrstica in s = stolpec
             for s in range(SIRINA - 2):
                 if self.plosca[v][s] == "X" and self.plosca[v][s + 1] == "X" and self.plosca[v][s + 2] == "X":
-                    if self.plosca[v][s - 1] == " " or self.plosca[v][s + 3] == " ":
-                        if v == 5: # prva vrstica
-                            if s - 1 >= 0 and self.plosca[v][s - 1] == " ":
-                                return s
-                            if  s + 3 <= 6 and self.plosca[v][s + 3] == " ":
-                                return s + 4
-                            else:
-                                return False
-                        if v <= 4:
-                            if s - 1 >= 0 and self.plosca[v][s - 1] == " " and self.plosca[v + 1][s - 1] != " ":
-                                return s
-                            if s + 3 <= 6 and self.plosca[v][s + 3] == " " and self.plosca[v + 1][s + 3] != " ":
-                                return s + 4
-                            else:
-                                return False
+                    if v == 5: # prva vrstica
+                        if s - 1 >= 0 and self.plosca[v][s - 1] == " ":
+                            return s
+                        if  s + 3 <= 6 and self.plosca[v][s + 3] == " ":
+                            return s + 4
+                        else:
+                            return False
+                    if v <= 4:
+                        if s - 1 >= 0 and self.plosca[v][s - 1] == " " and self.plosca[v + 1][s - 1] != " ":
+                            return s
+                        if s + 3 <= 6 and self.plosca[v][s + 3] == " " and self.plosca[v + 1][s + 3] != " ":
+                            return s + 4
+                        else:
+                            return False
         return False
 
     def skorajX_nav(self):    # navpicno
