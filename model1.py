@@ -278,6 +278,7 @@ class Igra:
     def vrstica5(self):
         return self.plosca[5]
 
+
     def narisi_plosco(self):
         for v in self.plosca:
             print(v)
