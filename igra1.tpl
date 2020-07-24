@@ -7,13 +7,13 @@
     <p><small>Avtor: <bold>Urban Rupnik</bold></small></p>
   </blockquote>
 
+
   <h2> <p>{{ igra.vrstica0() }}</p>
        <p>{{ igra.vrstica1() }}</p> 
        <p>{{ igra.vrstica2() }}</p>
        <p>{{ igra.vrstica3() }}</p>
        <p>{{ igra.vrstica4() }}</p>
        <p>{{ igra.vrstica5() }}</p> </h2>
-
 
   % if poskus == "W":
     <h1> ZMAGAL SI </h1>
@@ -24,11 +24,18 @@
     <h1> NEODLOČENO</h1>
     <h2> Poskusi še enkrat!</h2>
 
-  % else:
+  % elif igra.igralec == True:
 
   <form action="/igra/{{id_igre}}/" method="post">
-    Izbira stolpca: <input type="number" name="izbira_stolpca">
+    Izbira stolpca: <input type="number" min="1" max="7" name="izbira_stolpca" required>
     <button type="submit">Izberi</button>
+  </form>
+
+  % else:
+  
+  <form action="/igra/{{id_igre}}/" method="post">
+    Poteza računalnika: <input type="hidden" name="izbira_stolpca">
+    <button type="submit">Klikni</button>
   </form>
   
   % end
