@@ -12,7 +12,7 @@
 
 
   <form action="/igra/" method="post">
-    <button type="submit">Nova igra</button>
+    <button type="submit" accesskey="n">Nova igra</button>
   </form>
 </body>
 
