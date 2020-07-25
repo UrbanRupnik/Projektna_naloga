@@ -1,20 +1,20 @@
 % import model1
   <body style="background-color: #EBF5FF;">
-  <h1 style="background-color: #409cff ; padding-left: 38px; font-family:Roboto, sans-serif; padding-top: 5px;">Štiri v vrsto</h1>
+  <h1 style="background-color: #409cff ; padding-left: 20px; font-family:Roboto, sans-serif; padding-top: 5px;">Štiri v vrsto</h1>
 
   <blockquote>
     <p style="font-family: Roboto, sans-serif;">Projektna naloga pri predmetu UVP - 1. letnik.<br>
-    <small>Avtor: <bolder>Urban Rupnik</bolder></small><br></p>
+    <small>Avtor: Urban Rupnik</small><br></p>
   </blockquote>
 
 
   <style type="text/css">
-  .tg  {width: 70% ; height: 350px; min-height: 350px; table-layout: fixed; text-align: center; vertical-align: bottom; border-collapse:collapse;border-color:#9ABAD9;border-spacing:0;}
+  .tg  {width: 70% ; height: 60%; table-layout: fixed; text-align: center; vertical-align: bottom; border-collapse:collapse;border-color:#9ABAD9;border-spacing:0;}
   .tg td{background-color:#EBF5FF;border-color:#9ABAD9;border-style:solid;border-width:4px;color:#444;
-    font-family:Arial, sans-serif;font-size:14px;font-weight: bolder; overflow:auto;word-break:normal;table-layout: fixed; vertical-align: middle; width: 70%; padding-top: 0%; padding-bottom: 0%;}
+    font-family:Roboto, sans-serif;font-size:14px;font-weight: bolder; overflow:auto;word-break:normal;table-layout: fixed; vertical-align: middle; width: 70%; padding: 0%;}
   .tg th{background-color:#409cff;border-color:#9ABAD9;border-style:solid;border-width:4px;color:#fff;
-    font-family:Arial, sans-serif;font-size:14px;font-weight:normal;overflow:auto;padding:0px;word-break:normal;table-layout: fixed; vertical-align: bottom;}
-  .tg .tg-empm{font-family:Arial, sans-serif !important;;font-size:14px;font-weight: normal; text-align:center;vertical-align:bottom;padding: 0px;table-layout: fixed;}
+    font-family:Roboto, sans-serif;font-size:14px;font-weight:normal;overflow:auto;padding:0px;word-break:normal;table-layout: fixed; vertical-align: bottom;}
+  .tg .tg-empm{font-family:Roboto, sans-serif !important;;font-size:14px;font-weight: normal; text-align:center;vertical-align:bottom;padding: 0px;table-layout: fixed;}
   </style>
   <table class="tg">
   <thead>
@@ -87,17 +87,17 @@
   </table>
 
   % if poskus == "W":
-    <h1> ZMAGAL SI! </h1>
+    <h1 style="font-family: Roboto, sans-serif;"> ZMAGAL SI! </h1>
   % elif poskus == "L":
-    <h1> IZGUBIL SI! </h1>
-    <h2> Več sreče prihodnjič!</h2>
+    <h2 style="font-family: Roboto, sans-serif;"> IZGUBIL SI! <br>
+     Več sreče prihodnjič! </h2>
   % elif poskus == "R":
-    <h1> NEODLOČENO</h1>
-    <h2> Poskusi še enkrat!</h2>
+    <h1 style="font-family: Roboto, sans-serif;"> NEODLOČENO</h1>
+    <h2 style="font-family: Roboto, sans-serif;"> Poskusi še enkrat!</h2>
 
   % elif igra.igralec == True:
 
-  <form action="/igra/{{id_igre}}/" method="post" style="font-family: Roboto, sans-serif;">
+  <form action="/igra/{{id_igre}}/" method="post" style="font-family: Roboto, sans-serif; padding: 1px;">
     Izbira stolpca: <input type="number" min="1" max="7" name="izbira_stolpca" required accesskey="k">
     <button type="submit">Izberi</button>
   </form>
