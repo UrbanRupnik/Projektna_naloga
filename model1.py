@@ -32,7 +32,7 @@ class Igra:
 
 
     def simbol_pade_do_konca(self, izbira_stolpca):
-        if int(izbira_stolpca) > 7 or int(izbira_stolpca) < 1: #napacen vnos, izbira se enkrat isti igralec
+        if len(str(izbira_stolpca)) == 0 or int(izbira_stolpca) > 7 or int(izbira_stolpca) < 1: #napacen vnos, izbira se enkrat isti igralec
             return self.plosca
         a = 0
         nova_vrstica = []
@@ -120,6 +120,28 @@ class Igra:
                             return s + 4
                         else:
                             return False
+                if s + 3 <= 6 and self.plosca[v][s] == "O" and self.plosca[v][s + 2] == "O" and self.plosca[v][s + 3] == "O":
+                    if v == 5:
+                        if self.plosca[v][s + 1] == " ":
+                            return s + 2
+                        else:
+                            return False
+                    if v <= 4:
+                        if self.plosca[v][s + 1] == " " and self.plosca[v + 1][s + 1] != " ":
+                            return s + 2
+                        else:
+                            return False
+                if s + 3 <= 6 and self.plosca[v][s] == "O" and self.plosca[v][s + 1] == "O" and self.plosca[v][s + 3] == "O":
+                    if v == 5:
+                        if self.plosca[v][s + 2] == " ":
+                            return s + 3
+                        else:
+                            return False
+                    if v <= 4:
+                        if self.plosca[v][s + 2] == " " and self.plosca[v + 1][s + 2] != " ":
+                            return s + 3
+                        else:
+                            return False
         return False
 
     def skoraj_nav(self):    # navpicno
@@ -137,7 +159,17 @@ class Igra:
                     if v >= 1 and s >= 1 and self.plosca[v - 1][s - 1] == " " and self.plosca[v][s - 1] != " ":
                         return s
                     if v <= 1 and s <= 3 and self.plosca[v + 3][s + 3] == " " and self.plosca[v + 4][s + 3] != " ":
-                        return s + 4      
+                        return s + 4
+                if v + 3 <= 5 and s + 3 <= 6 and self.plosca[v][s] == "O" and self.plosca[v + 2][s + 2] == "O" and self.plosca[v + 3][s + 3] == "O":
+                    if self.plosca[v + 1][s + 1] == " " and self.plosca[v + 2][s + 1] != " ":
+                        return s + 2
+                    else:
+                        return False
+                if v + 3 <= 5 and s + 3 <= 6 and self.plosca[v][s] == "O" and self.plosca[v + 1][s + 1] == "O" and self.plosca[v + 3][s + 3] == "O":
+                    if self.plosca[v + 2][s + 2] == " " and self.plosca[v + 3][s + 2] != " ":
+                        return s + 3
+                    else:
+                        return False
         return False
     
     def skoraj_pos2(self):    # posevno /
@@ -148,6 +180,16 @@ class Igra:
                         return s + 4
                     if v <= 1 and s >= 1 and self.plosca[v + 3][s - 1] == " " and self.plosca[v + 4][s - 1] != " ":
                         return s
+                if v + 3 <= 5 and s + 3 <= 6 and self.plosca[v][s + 3] == "O" and self.plosca[v + 2][s + 1] == "O" and self.plosca[v + 3][s] == "O":
+                    if self.plosca[v + 1][s + 2] == " " and self.plosca[v + 2][s + 2] != " ":
+                        return s + 3
+                    else:
+                        return False
+                if v + 3 <= 5 and s + 3 <= 6 and self.plosca[v][s + 3] == "O" and self.plosca[v + 1][s + 2] == "O" and self.plosca[v + 3][s] == "O":
+                    if self.plosca[v + 2][s + 1] == " " and self.plosca[v + 3][s + 1] != " ":
+                        return s + 2
+                    else:
+                        return False
         return False
 
 
@@ -169,6 +211,28 @@ class Igra:
                             return s + 4
                         else:
                             return False
+                if s + 3 <= 6 and self.plosca[v][s] == "X" and self.plosca[v][s + 2] == "X" and self.plosca[v][s + 3] == "X":
+                    if v == 5:
+                        if self.plosca[v][s + 1] == " ":
+                            return s + 2
+                        else:
+                            return False
+                    if v <= 4:
+                        if self.plosca[v][s + 1] == " " and self.plosca[v + 1][s + 1] != " ":
+                            return s + 2
+                        else:
+                            return False
+                if s + 3 <= 6 and self.plosca[v][s] == "X" and self.plosca[v][s + 1] == "X" and self.plosca[v][s + 3] == "X":
+                    if v == 5:
+                        if self.plosca[v][s + 2] == " ":
+                            return s + 3
+                        else:
+                            return False
+                    if v <= 4:
+                        if self.plosca[v][s + 2] == " " and self.plosca[v + 1][s + 2] != " ":
+                            return s + 3
+                        else:
+                            return False
         return False
 
     def skorajX_nav(self):    # navpicno
@@ -186,7 +250,17 @@ class Igra:
                     if v >= 1 and s >= 1 and self.plosca[v - 1][s - 1] == " " and self.plosca[v][s - 1] != " ":
                         return s
                     if v <= 1 and s <= 3 and self.plosca[v + 3][s + 3] == " " and self.plosca[v + 4][s + 3] != " ":
-                        return s + 4     
+                        return s + 4
+                if v + 3 <= 5 and s + 3 <= 6 and self.plosca[v][s] == "X" and self.plosca[v + 2][s + 2] == "X" and self.plosca[v + 3][s + 3] == "X":
+                    if self.plosca[v + 1][s + 1] == " " and self.plosca[v + 2][s + 1] != " ":
+                        return s + 2
+                    else:
+                        return False
+                if v + 3 <= 5 and s + 3 <= 6 and self.plosca[v][s] == "X" and self.plosca[v + 1][s + 1] == "X" and self.plosca[v + 3][s + 3] == "X":
+                    if self.plosca[v + 2][s + 2] == " " and self.plosca[v + 3][s + 2] != " ":
+                        return s + 3
+                    else:
+                        return False 
         return False
     
     def skorajX_pos2(self):    # posevno /
@@ -197,6 +271,16 @@ class Igra:
                         return s + 4
                     if v <= 1 and s >= 1 and self.plosca[v + 3][s - 1] == " " and self.plosca[v + 4][s - 1] != " ":
                         return s
+                if v + 3 <= 5 and s + 3 <= 5 and self.plosca[v][s + 3] == "X" and self.plosca[v + 2][s + 1] == "X" and self.plosca[v + 3][s] == "X":
+                    if self.plosca[v + 1][s + 2] == " " and self.plosca[v + 2][s + 2] != " ":
+                        return s + 3
+                    else:
+                        return False
+                if v + 3 <= 5 and s + 3 <= 6 and self.plosca[v][s + 3] == "X" and self.plosca[v + 1][s + 2] == "X" and self.plosca[v + 3][s] == "X":
+                    if self.plosca[v + 2][s + 1] == " " and self.plosca[v + 3][s + 1] != " ":
+                        return s + 2
+                    else:
+                        return False
         return False
 
     def zmaga_O(self):
