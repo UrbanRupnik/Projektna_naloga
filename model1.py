@@ -1,5 +1,4 @@
 import random
-import json
 
 #konstante
 ZACETEK = "Z"
@@ -13,8 +12,8 @@ SIRINA = 7
 VISINA = 6
 
 
-#plosca je visine 6 in sirine 7
-def def_plosce():
+# plosca je visine 6 in sirine 7
+def def_plosce(): # vrne seznam seznamov velikosti igralne plosce
     vrstica = []
     for i in range(SIRINA):
         vrstica.append(" ")
@@ -32,8 +31,8 @@ class Igra:
 
 
     def simbol_pade_do_konca(self, izbira_stolpca):
-        if len(str(izbira_stolpca)) == 0 or int(izbira_stolpca) > 7 or int(izbira_stolpca) < 1: #napacen vnos, izbira se enkrat isti igralec
-            return self.plosca
+        if len(str(izbira_stolpca)) == 0 or int(izbira_stolpca) > 7 or int(izbira_stolpca) < 1:
+            return self.plosca # napacen vnos, izbira se enkrat isti igralec
         a = 0
         nova_vrstica = []
         nova_plosca = []
@@ -44,7 +43,7 @@ class Igra:
             if v < 0:
                 break
         if v < 0:
-            return self.plosca #poln stolpec, izbira se enkrat isti igralec
+            return self.plosca # poln stolpec, izbira se enkrat isti igralec
         elif self.igralec == True:
             self.igralec = False
             for vrstica in self.plosca:
@@ -363,7 +362,7 @@ class Igra:
         return self.plosca[5]
 
 
-    def narisi_plosco(self):
+    def narisi_plosco(self):  # se uporablja pri igranju v tekstovnem vmesniku
         for v in self.plosca:
             print(v)
 
@@ -384,7 +383,7 @@ class Igra:
                 return REMI
 
 
-def nova_igra1():
+def nova_igra1(): # narise novo plosco in doloci kdo zacne
     plosca = def_plosce()
     igralec = random.choice([True, False])
     return Igra(plosca, igralec)
@@ -392,10 +391,10 @@ def nova_igra1():
 
 class Stiri:
     def __init__(self):
-        # Slovar, ki ID-ju priredi objekt igre
+        # Slovar, ki id-ju priredi objekt igre
         self.igre = {}    # int -> (Igra, stanje)
 
-    def prosti_id_igre(self):  # vrne nov id, ki ga neuporablja se nobena igra
+    def prosti_id_igre(self):  # vrne nov id, ki ga ne uporablja se nobena igra
         if len(self.igre) == 0:
             return 0
         else:
@@ -421,5 +420,5 @@ class Stiri:
         # igramo, dobimo novo stanje
         novo_stanje = trenutna_igra.igranje(izbira_stolpca)
 
-        # zapisemo posodbljeno stanje in igro nazaj v "BAZO"
+        # posodbljeno stanje in igr1 nazaj v self.igre
         self.igre[id_igre] = (trenutna_igra, novo_stanje)

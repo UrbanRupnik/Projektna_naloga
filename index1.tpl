@@ -1,9 +1,9 @@
-% rebase("base1.tpl")
 <html>
 
 <body style="background-color: #EBF5FF;">
 
-  <h1 style="background-color: #409cff ; padding-left: 20px; font-family:Roboto, sans-serif; padding-top: 5px;">Štiri v vrsto</h1>
+  <h1 style="background-color: #409cff; padding-left: 20px;
+            font-family:Roboto, sans-serif; padding-top: 5px;">Štiri v vrsto</h1>
   
     <blockquote>
       <p style="font-family: Roboto, sans-serif;">Projektna naloga pri predmetu UVP - 1. letnik.<br>

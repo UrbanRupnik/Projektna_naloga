@@ -9,12 +9,20 @@
 
 
   <style type="text/css">
-  .tg  {width: 70% ; height: 60%; table-layout: fixed; text-align: center; vertical-align: bottom; border-collapse:collapse;border-color:#9ABAD9;border-spacing:0;}
-  .tg td{background-color:#EBF5FF;border-color:#9ABAD9;border-style:solid;border-width:4px;color:#444;
-    font-family:Roboto, sans-serif;font-size:14px;font-weight: bolder; overflow:auto;word-break:normal;table-layout: fixed; vertical-align: middle; width: 70%; padding: 0%;}
-  .tg th{background-color:#409cff;border-color:#9ABAD9;border-style:solid;border-width:4px;color:#fff;
-    font-family:Roboto, sans-serif;font-size:14px;font-weight:normal;overflow:auto;padding:0px;word-break:normal;table-layout: fixed; vertical-align: bottom;}
-  .tg .tg-empm{font-family:Roboto, sans-serif !important;;font-size:14px;font-weight: normal; text-align:center;vertical-align:bottom;padding: 0px;table-layout: fixed;}
+  .tg  {width: 70%; height: 60%; table-layout: fixed; text-align: center;
+        vertical-align: bottom; border-collapse: collapse; border-color: #9ABAD9;
+        border-spacing: 0;}
+  .tg td{background-color: #EBF5FF; border-color: #9ABAD9; border-style: solid;
+         border-width: 4px; color: #444; font-family: Roboto, sans-serif;
+         font-size: 14px; font-weight: bolder; overflow: auto; word-break: normal;
+         table-layout: fixed; vertical-align: middle; width: 70%; padding: 0%;}
+  .tg th{background-color: #409cff; border-color: #9ABAD9; border-style: solid;
+         border-width: 4px; color: #fff; font-family: Roboto, sans-serif;
+         font-size: 14px; font-weight: normal; overflow: auto; padding: 0px;
+         word-break: normal; table-layout: fixed; vertical-align: bottom;}
+  .tg .tg-empm{font-family: Roboto, sans-serif; font-size: 14px; font-weight: normal;
+               text-align: center; vertical-align: bottom; padding: 0px;
+               table-layout: fixed;}
   </style>
   <table class="tg">
   <thead>
@@ -104,7 +112,7 @@
 
   % else:
   
-  <form action="/igra/{{id_igre}}/" method="post" style="font-family: Roboto, sans-serif;">
+  <form action="/igra/{{id_igre}}/" method="post" style="font-family: Roboto, sans-serif; padding: 1px;">
     Poteza računalnika: <input type="hidden" name="izbira_stolpca">
     <button type="submit" accesskey="k">Klikni</button>
   </form>

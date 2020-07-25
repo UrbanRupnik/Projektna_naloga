@@ -18,11 +18,11 @@ def zahtevaj_vnos():
     return input("Izberi stolpec:")
 
 def pozeni_vmesnik():
-    # Naredimo novo igro
+    # nova igra
     trenutna_igra = model1.nova_igra1()
 
     while True:
-        #pokazemo mu stanje
+        #pokazemo stanje
         izpis_igre(trenutna_igra)
 
         if trenutna_igra.igralec == True:
