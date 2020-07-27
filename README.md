@@ -14,7 +14,7 @@ Pri nalogi sem se največ zanašal na [Vislice](https://github.com/UrbanRupnik/V
 CSS sem naredil sam, osnutek igralne plošče oziroma tabele pa sem sestavil s programom: [Tables Generator](https://www.tablesgenerator.com/).
 
 ### Več uporabnikov
-Ta različica piškotkov (še) ne vsebuje.
+Ta različica piškotkov ne vsebuje.
 
 ### Znane napake
 1. Igralna plošča ob vnosu elementa rahlo spreminja višino vrstic.

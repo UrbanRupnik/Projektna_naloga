@@ -36,10 +36,10 @@ def pozeni_vmesnik():
 
         izpis_igre(trenutna_igra)
 
-        if trenutna_igra.zmaga_O():
+        if trenutna_igra.zmaga("O"):
             print(izpis_zmage(trenutna_igra))
             return #koncas
-        if trenutna_igra.zmaga_X():
+        if trenutna_igra.zmaga("X"):
             print(izpis_poraza(trenutna_igra))
             return #koncas
         if trenutna_igra.remi():

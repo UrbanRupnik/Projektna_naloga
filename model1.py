@@ -15,7 +15,7 @@ VISINA = 6
 # plosca je visine 6 in sirine 7
 def def_plosce(): # vrne seznam seznamov velikosti igralne plosce
     vrstica = []
-    for i in range(SIRINA):
+    for _ in range(SIRINA):
         vrstica.append(" ")
     plosca = [vrstica for j in range(VISINA)]
     return plosca
@@ -28,83 +28,81 @@ class Igra:
         self.plosca = plosca
         self.igralec = igralec
 
+    def napacen_vnos(self, izbira_stolpca):
+        return (len(str(izbira_stolpca)) == 0 
+                or int(izbira_stolpca) > 7 
+                or int(izbira_stolpca) < 1
+               )
 
 
     def simbol_pade_do_konca(self, izbira_stolpca):
-        if len(str(izbira_stolpca)) == 0 or int(izbira_stolpca) > 7 or int(izbira_stolpca) < 1:
+        if self.napacen_vnos(izbira_stolpca):
             return self.plosca # napacen vnos, izbira se enkrat isti igralec
-        a = 0
-        nova_vrstica = []
-        nova_plosca = []
         v = VISINA - 1
         s = int(izbira_stolpca) - 1
         while self.plosca[v][s] != " ":
             v -= 1
             if v < 0:
-                break
+                break # potuje od spodaj navzgor in se zlomi ko pride do vrha ali praznega polja
         if v < 0:
             return self.plosca # poln stolpec, izbira se enkrat isti igralec
         elif self.igralec == True:
             self.igralec = False
-            for vrstica in self.plosca:
-                if a == v:
-                    for znak in vrstica:
-                        nova_vrstica.append(znak)
-                    nova_vrstica[s] = "O"
-                    vrstica = nova_vrstica
-                nova_plosca.append(vrstica)
-                a += 1
-            self.plosca = nova_plosca
-            return self.plosca
+            return self.dodaj_simbol(v, s, "O")
         else:
             self.igralec = True
-            for vrstica in self.plosca:
-                if a == v:
-                    for znak in vrstica:
-                        nova_vrstica.append(znak)
-                    nova_vrstica[s] = "X"
-                    vrstica = nova_vrstica
-                nova_plosca.append(vrstica)
-                a += 1
-            self.plosca = nova_plosca
-            return self.plosca
+            return self.dodaj_simbol(v, s, "X")
+
+    def dodaj_simbol(self, v, s, simbol):
+        a = 0
+        nova_vrstica = []
+        nova_plosca = []
+        for vrstica in self.plosca:
+            if a == v:
+                for znak in vrstica:
+                    nova_vrstica.append(znak)
+                nova_vrstica[s] = simbol
+                vrstica = nova_vrstica
+            nova_plosca.append(vrstica)
+            a += 1
+        self.plosca = nova_plosca
+        return self.plosca
 
 
 
     def poteza_racunalnika(self):
-        if self.skorajX_vod() != False:
-            return self.skorajX_vod()
+        if self.skoraj_vod("X") != False:
+            return self.skoraj_vod("X")
 
-        if self.skorajX_nav() != False:
-            return self.skorajX_nav()
+        elif self.skoraj_nav("X") != False:
+            return self.skoraj_nav("X")
 
-        if self.skorajX_pos1() != False:
-            return self.skorajX_pos1()
+        elif self.skoraj_pos1("X") != False:
+            return self.skoraj_pos1("X")
             
-        if self.skorajX_pos2() != False:
-            return self.skorajX_pos2()
+        elif self.skoraj_pos2("X") != False:
+            return self.skoraj_pos2("X")
 
-        if self.skoraj_vod() != False:
-            return self.skoraj_vod()
+        elif self.skoraj_vod("O") != False:
+            return self.skoraj_vod("O")
 
+        elif self.skoraj_nav("O") != False:
+            return self.skoraj_nav("O")
 
-        if self.skoraj_nav() != False:
-            return self.skoraj_nav()
-
-        if self.skoraj_pos1() != False:
-            return self.skoraj_pos1()
+        elif self.skoraj_pos1("O") != False:
+            return self.skoraj_pos1("O")
             
-        if self.skoraj_pos2() != False:
-            return self.skoraj_pos2()
+        elif self.skoraj_pos2("O") != False:
+            return self.skoraj_pos2("O")
         
         else:
             return random.randint(1, SIRINA)  
                 
 
-    def skoraj_vod(self): # vodoravno
+    def skoraj_vod(self, simbol): # vodoravno
         for v in range(VISINA):      # v = vrstica in s = stolpec
             for s in range(SIRINA - 2):
-                if self.plosca[v][s] == "O" and self.plosca[v][s + 1] == "O" and self.plosca[v][s + 2] == "O":
+                if self.plosca[v][s] == simbol and self.plosca[v][s + 1] == simbol and self.plosca[v][s + 2] == simbol:
                     if v == 5: # prva vrstica
                         if s - 1 >= 0 and self.plosca[v][s - 1] == " ":
                             return s
@@ -119,7 +117,7 @@ class Igra:
                             return s + 4
                         else:
                             return False
-                if s + 3 <= 6 and self.plosca[v][s] == "O" and self.plosca[v][s + 2] == "O" and self.plosca[v][s + 3] == "O":
+                if s + 3 <= 6 and self.plosca[v][s] == simbol and self.plosca[v][s + 2] == simbol and self.plosca[v][s + 3] == simbol:
                     if v == 5:
                         if self.plosca[v][s + 1] == " ":
                             return s + 2
@@ -130,7 +128,7 @@ class Igra:
                             return s + 2
                         else:
                             return False
-                if s + 3 <= 6 and self.plosca[v][s] == "O" and self.plosca[v][s + 1] == "O" and self.plosca[v][s + 3] == "O":
+                if s + 3 <= 6 and self.plosca[v][s] == simbol and self.plosca[v][s + 1] == simbol and self.plosca[v][s + 3] == simbol:
                     if v == 5:
                         if self.plosca[v][s + 2] == " ":
                             return s + 3
@@ -143,48 +141,48 @@ class Igra:
                             return False
         return False
 
-    def skoraj_nav(self):    # navpicno
+    def skoraj_nav(self, simbol):    # navpicno
         for v in range(VISINA - 2):
             for s in range(SIRINA):
-                if self.plosca[v][s] == "O" and self.plosca[v + 1][s] == "O" and self.plosca[v + 2][s] == "O":
+                if self.plosca[v][s] == simbol and self.plosca[v + 1][s] == simbol and self.plosca[v + 2][s] == simbol:
                     if self.plosca[v - 1][s] == " ":
                         return s + 1
         return False
 
-    def skoraj_pos1(self):    # posevno \
+    def skoraj_pos1(self, simbol):    # posevno \
         for v in range(VISINA - 2):
             for s in range(SIRINA - 2):
-                if self.plosca[v][s] == "O" and self.plosca[v + 1][s + 1] == "O" and self.plosca[v + 2][s + 2] == "O":
+                if self.plosca[v][s] == simbol and self.plosca[v + 1][s + 1] == simbol and self.plosca[v + 2][s + 2] == simbol:
                     if v >= 1 and s >= 1 and self.plosca[v - 1][s - 1] == " " and self.plosca[v][s - 1] != " ":
                         return s
                     if v <= 1 and s <= 3 and self.plosca[v + 3][s + 3] == " " and self.plosca[v + 4][s + 3] != " ":
                         return s + 4
-                if v + 3 <= 5 and s + 3 <= 6 and self.plosca[v][s] == "O" and self.plosca[v + 2][s + 2] == "O" and self.plosca[v + 3][s + 3] == "O":
+                if v + 3 <= 5 and s + 3 <= 6 and self.plosca[v][s] == simbol and self.plosca[v + 2][s + 2] == simbol and self.plosca[v + 3][s + 3] == simbol:
                     if self.plosca[v + 1][s + 1] == " " and self.plosca[v + 2][s + 1] != " ":
                         return s + 2
                     else:
                         return False
-                if v + 3 <= 5 and s + 3 <= 6 and self.plosca[v][s] == "O" and self.plosca[v + 1][s + 1] == "O" and self.plosca[v + 3][s + 3] == "O":
+                if v + 3 <= 5 and s + 3 <= 6 and self.plosca[v][s] == simbol and self.plosca[v + 1][s + 1] == simbol and self.plosca[v + 3][s + 3] == simbol:
                     if self.plosca[v + 2][s + 2] == " " and self.plosca[v + 3][s + 2] != " ":
                         return s + 3
                     else:
                         return False
         return False
     
-    def skoraj_pos2(self):    # posevno /
+    def skoraj_pos2(self, simbol):    # posevno /
         for v in range(VISINA - 2):
             for s in reversed(range(SIRINA - 2)):
-                if self.plosca[v][s + 2] == "O" and self.plosca[v + 1][s + 1] == "O" and self.plosca[v + 2][s] == "O":
+                if self.plosca[v][s + 2] == simbol and self.plosca[v + 1][s + 1] == simbol and self.plosca[v + 2][s] == simbol:
                     if v >= 1 and s <= 3 and self.plosca[v - 1][s + 3] == " " and self.plosca[v][s + 3] != " ":
                         return s + 4
                     if v <= 1 and s >= 1 and self.plosca[v + 3][s - 1] == " " and self.plosca[v + 4][s - 1] != " ":
                         return s
-                if v + 3 <= 5 and s + 3 <= 6 and self.plosca[v][s + 3] == "O" and self.plosca[v + 2][s + 1] == "O" and self.plosca[v + 3][s] == "O":
+                if v + 3 <= 5 and s + 3 <= 6 and self.plosca[v][s + 3] == simbol and self.plosca[v + 2][s + 1] == simbol and self.plosca[v + 3][s] == simbol:
                     if self.plosca[v + 1][s + 2] == " " and self.plosca[v + 2][s + 2] != " ":
                         return s + 3
                     else:
                         return False
-                if v + 3 <= 5 and s + 3 <= 6 and self.plosca[v][s + 3] == "O" and self.plosca[v + 1][s + 2] == "O" and self.plosca[v + 3][s] == "O":
+                if v + 3 <= 5 and s + 3 <= 6 and self.plosca[v][s + 3] == simbol and self.plosca[v + 1][s + 2] == simbol and self.plosca[v + 3][s] == simbol:
                     if self.plosca[v + 2][s + 1] == " " and self.plosca[v + 3][s + 1] != " ":
                         return s + 2
                     else:
@@ -192,145 +190,34 @@ class Igra:
         return False
 
 
-    def skorajX_vod(self): # vodoravno zmaga za X
-        for v in range(VISINA):      # v = vrstica in s = stolpec
-            for s in range(SIRINA - 2):
-                if self.plosca[v][s] == "X" and self.plosca[v][s + 1] == "X" and self.plosca[v][s + 2] == "X":
-                    if v == 5: # prva vrstica
-                        if s - 1 >= 0 and self.plosca[v][s - 1] == " ":
-                            return s
-                        if  s + 3 <= 6 and self.plosca[v][s + 3] == " ":
-                            return s + 4
-                        else:
-                            return False
-                    if v <= 4:
-                        if s - 1 >= 0 and self.plosca[v][s - 1] == " " and self.plosca[v + 1][s - 1] != " ":
-                            return s
-                        if s + 3 <= 6 and self.plosca[v][s + 3] == " " and self.plosca[v + 1][s + 3] != " ":
-                            return s + 4
-                        else:
-                            return False
-                if s + 3 <= 6 and self.plosca[v][s] == "X" and self.plosca[v][s + 2] == "X" and self.plosca[v][s + 3] == "X":
-                    if v == 5:
-                        if self.plosca[v][s + 1] == " ":
-                            return s + 2
-                        else:
-                            return False
-                    if v <= 4:
-                        if self.plosca[v][s + 1] == " " and self.plosca[v + 1][s + 1] != " ":
-                            return s + 2
-                        else:
-                            return False
-                if s + 3 <= 6 and self.plosca[v][s] == "X" and self.plosca[v][s + 1] == "X" and self.plosca[v][s + 3] == "X":
-                    if v == 5:
-                        if self.plosca[v][s + 2] == " ":
-                            return s + 3
-                        else:
-                            return False
-                    if v <= 4:
-                        if self.plosca[v][s + 2] == " " and self.plosca[v + 1][s + 2] != " ":
-                            return s + 3
-                        else:
-                            return False
-        return False
-
-    def skorajX_nav(self):    # navpicno
-        for v in range(VISINA - 2):
-            for s in range(SIRINA):
-                if self.plosca[v][s] == "X" and self.plosca[v + 1][s] == "X" and self.plosca[v + 2][s] == "X":
-                    if self.plosca[v - 1][s] == " ":
-                        return s + 1
-        return False
-
-    def skorajX_pos1(self):    # posevno \
-        for v in range(VISINA - 2):
-            for s in range(SIRINA - 2):
-                if self.plosca[v][s] == "X" and self.plosca[v + 1][s + 1] == "X" and self.plosca[v + 2][s + 2] == "X":
-                    if v >= 1 and s >= 1 and self.plosca[v - 1][s - 1] == " " and self.plosca[v][s - 1] != " ":
-                        return s
-                    if v <= 1 and s <= 3 and self.plosca[v + 3][s + 3] == " " and self.plosca[v + 4][s + 3] != " ":
-                        return s + 4
-                if v + 3 <= 5 and s + 3 <= 6 and self.plosca[v][s] == "X" and self.plosca[v + 2][s + 2] == "X" and self.plosca[v + 3][s + 3] == "X":
-                    if self.plosca[v + 1][s + 1] == " " and self.plosca[v + 2][s + 1] != " ":
-                        return s + 2
-                    else:
-                        return False
-                if v + 3 <= 5 and s + 3 <= 6 and self.plosca[v][s] == "X" and self.plosca[v + 1][s + 1] == "X" and self.plosca[v + 3][s + 3] == "X":
-                    if self.plosca[v + 2][s + 2] == " " and self.plosca[v + 3][s + 2] != " ":
-                        return s + 3
-                    else:
-                        return False 
-        return False
-    
-    def skorajX_pos2(self):    # posevno /
-        for v in range(VISINA - 2):
-            for s in reversed(range(SIRINA - 2)):
-                if self.plosca[v][s + 2] == "X" and self.plosca[v + 1][s + 1] == "X" and self.plosca[v + 2][s] == "X":
-                    if v >= 1 and s <= 3 and self.plosca[v - 1][s + 3] == " " and self.plosca[v][s + 3] != " ":
-                        return s + 4
-                    if v <= 1 and s >= 1 and self.plosca[v + 3][s - 1] == " " and self.plosca[v + 4][s - 1] != " ":
-                        return s
-                if v + 3 <= 5 and s + 3 <= 5 and self.plosca[v][s + 3] == "X" and self.plosca[v + 2][s + 1] == "X" and self.plosca[v + 3][s] == "X":
-                    if self.plosca[v + 1][s + 2] == " " and self.plosca[v + 2][s + 2] != " ":
-                        return s + 3
-                    else:
-                        return False
-                if v + 3 <= 5 and s + 3 <= 6 and self.plosca[v][s + 3] == "X" and self.plosca[v + 1][s + 2] == "X" and self.plosca[v + 3][s] == "X":
-                    if self.plosca[v + 2][s + 1] == " " and self.plosca[v + 3][s + 1] != " ":
-                        return s + 2
-                    else:
-                        return False
-        return False
-
-    def zmaga_O(self):
+    def zmaga(self, simbol):
         # vodoravno
         for v in range(VISINA):      # v = vrstica in s = stolpec
             for s in range(SIRINA - 3):
-                if self.plosca[v][s] == "O" and self.plosca[v][s + 1] == "O" and self.plosca[v][s + 2] == "O" and self.plosca[v][s + 3] == "O":
+                if self.plosca[v][s] == simbol and self.plosca[v][s + 1] == simbol and self.plosca[v][s + 2] == simbol and self.plosca[v][s + 3] == simbol:
                     return True
 
         # navpicno
         for v in range(VISINA - 3):
             for s in range(SIRINA):
-                if self.plosca[v][s] == "O" and self.plosca[v + 1][s] == "O" and self.plosca[v + 2][s] == "O" and self.plosca[v + 3][s] == "O":
+                if self.plosca[v][s] == simbol and self.plosca[v + 1][s] == simbol and self.plosca[v + 2][s] == simbol and self.plosca[v + 3][s] == simbol:
                     return True
 
         # posevno \
         for v in range(VISINA - 3):
             for s in range(SIRINA - 3):
-                if self.plosca[v][s] == "O" and self.plosca[v + 1][s + 1] == "O" and self.plosca[v + 2][s + 2] == "O" and self.plosca[v + 3][s + 3] == "O":
+                if self.plosca[v][s] == simbol and self.plosca[v + 1][s + 1] == simbol and self.plosca[v + 2][s + 2] == simbol and self.plosca[v + 3][s + 3] == simbol:
                     return True
 
         # posevno /
         for v in range(VISINA - 3):
             for s in reversed(range(SIRINA - 3)):
-                if self.plosca[v][s + 3] == "O" and self.plosca[v + 1][s + 2] == "O" and self.plosca[v + 2][s + 1] == "O" and self.plosca[v + 3][s] == "O":
+                if self.plosca[v][s + 3] == simbol and self.plosca[v + 1][s + 2] == simbol and self.plosca[v + 2][s + 1] == simbol and self.plosca[v + 3][s] == simbol:
                     return True
 
         return False
 
-    def zmaga_X(self):
-                # vodoravno
-        for v in range(VISINA):      # v = vrstica in s = stolpec
-            for s in range(SIRINA - 3):
-                if self.plosca[v][s] == "X" and self.plosca[v][s + 1] == "X" and self.plosca[v][s + 2] == "X" and self.plosca[v][s + 3] == "X":
-                    return True
-        # navpicno
-        for v in range(VISINA - 3):
-            for s in range(SIRINA):
-                if self.plosca[v][s] == "X" and self.plosca[v + 1][s] == "X" and self.plosca[v + 2][s] == "X" and self.plosca[v + 3][s] == "X":
-                    return True
-        # posevno /
-        for v in range(VISINA - 3):
-            for s in range(SIRINA - 3):
-                if self.plosca[v][s] == "X" and self.plosca[v + 1][s + 1] == "X" and self.plosca[v + 2][s + 2] == "X" and self.plosca[v + 3][s + 3] == "X":
-                    return True
-        # posevno \
-        for v in range(VISINA - 3):
-            for s in reversed(range(SIRINA - 3)):
-                if self.plosca[v][s + 3] == "X" and self.plosca[v + 1][s + 2] == "X" and self.plosca[v + 2][s + 1] == "X" and self.plosca[v + 3][s] == "X":
-                    return True
-        return False
+
 
     def remi(self):
         for v in self.plosca:
@@ -348,18 +235,9 @@ class Igra:
             self.plosca = self.simbol_pade_do_konca(izbira_stolpca)
             return self.plosca
 
-    def vrstica0(self):
-        return self.plosca[0]
-    def vrstica1(self):
-        return self.plosca[1]
-    def vrstica2(self):
-        return self.plosca[2]    
-    def vrstica3(self):
-        return self.plosca[3]
-    def vrstica4(self):
-        return self.plosca[4]
-    def vrstica5(self):
-        return self.plosca[5]
+    def narisi_vrstico(self, stevilka_vrstice):
+        return self.plosca[stevilka_vrstice]
+
 
 
     def narisi_plosco(self):  # se uporablja pri igranju v tekstovnem vmesniku
@@ -370,14 +248,14 @@ class Igra:
     def igranje(self, izbira_stolpca):
         if self.igralec == True:
             self.plosca = self.simbol_pade_do_konca(izbira_stolpca)
-            if self.zmaga_O():
+            if self.zmaga("O"):
                 return ZMAGA
             if self.remi():
                 return REMI
         else:
             izbira_stolpca = self.poteza_racunalnika()
             self.plosca = self.simbol_pade_do_konca(izbira_stolpca)
-            if self.zmaga_X():
+            if self.zmaga("X"):
                 return PORAZ
             if self.remi():
                 return REMI
@@ -391,8 +269,7 @@ def nova_igra1(): # narise novo plosco in doloci kdo zacne
 
 class Stiri:
     def __init__(self):
-        # Slovar, ki id-ju priredi objekt igre
-        self.igre = {}    # int -> (Igra, stanje)
+        self.igre = {}    # slovar, ki id-ju priredi objekt igre: int -> (Igra, stanje)
 
     def prosti_id_igre(self):  # vrne nov id, ki ga ne uporablja se nobena igra
         if len(self.igre) == 0:
@@ -401,17 +278,13 @@ class Stiri:
             return max(self.igre.keys()) + 1
 
     def nova_igra(self):
-        # dobimo svež id
-        nov_id = self.prosti_id_igre()
+        nov_id = self.prosti_id_igre() # dobimo nov id
 
-        # naredimo novo igro
-        sveza_igra = nova_igra1()
+        sveza_igra = nova_igra1() # naredimo novo igro
 
-        # vse to shranimo v self.igre
-        self.igre[nov_id] = sveza_igra, ZACETEK
+        self.igre[nov_id] = sveza_igra, ZACETEK # vse shranimo v self.igre
 
-        # vrnemo nov id
-        return nov_id
+        return nov_id # vrnemo nov id
 
     def igranje(self, id_igre, izbira_stolpca):
         # dobimo staro igro ven
@@ -420,5 +293,5 @@ class Stiri:
         # igramo, dobimo novo stanje
         novo_stanje = trenutna_igra.igranje(izbira_stolpca)
 
-        # posodbljeno stanje in igr1 nazaj v self.igre
+        # posodbljeno stanje in igro shranimo nazaj v self.igre
         self.igre[id_igre] = (trenutna_igra, novo_stanje)
