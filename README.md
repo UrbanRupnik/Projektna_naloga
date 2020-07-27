@@ -18,6 +18,8 @@ Ta različica piškotkov ne vsebuje.
 
 ### Znane napake
 1. Igralna plošča ob vnosu elementa rahlo spreminja višino vrstic.
+2. Proti koncu igre, ko je na voljo le še kakšen stolpec,
+je potrebno potezo računalnika večkrat pognati, da naključno izbere pravi stolpec.
 
 ## Avtor
 * **Urban Rupnik**
