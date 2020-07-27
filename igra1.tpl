@@ -11,11 +11,11 @@
 
     <style type="text/css">
     .tg  {width: 70%; height: 60%; table-layout: fixed; text-align: center;
-          vertical-align: bottom; border-collapse: collapse; border-color: #9ABAD9;
+          border-collapse: collapse; border-color: #9ABAD9;
           border-spacing: 0; font-size: 14px; overflow: auto; border-style: solid;
           border-width: 4px; word-break: normal;}
     .tg td{background-color: #EBF5FF; border-color: #9ABAD9; color: #444; 
-           font-weight: bolder; padding: 0px; border-style: solid; border-width: 4px;}
+           font-weight: bolder; padding: 2px; border-style: solid; border-width: 4px;}
     .tg th{background-color: #409cff; border-color: #9ABAD9;
            color: #fff; border-style: solid; border-width: 4px;}
     .tg .tg-empm{padding: 0px;}

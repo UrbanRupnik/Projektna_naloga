@@ -31,7 +31,6 @@ def pozeni_vmesnik():
         else:
             izbira_stolpca = trenutna_igra.poteza_racunalnika()
 
-
         rezultat = trenutna_igra.poteza(izbira_stolpca)
 
         izpis_igre(trenutna_igra)

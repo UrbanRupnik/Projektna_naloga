@@ -10,7 +10,8 @@
       <small>Avtor: Urban Rupnik</small><br></p>
     </blockquote>
 
-    <p style="padding: 38px;">Za začetek igre pritisni tipko "Nova igra".<br>
+    <p style="padding-left: 38px; background-color: #409cff; font-size: 20px;">
+    Za začetek igre pritisnite tipko "Nova igra".<br>
     Ob vaši potezi v okvirček vnesite številko stolpca in kliknite na gumb "Izberi". <br>
     Ob potezi računalnika kliknite na gumb "Klikni".</p>
 
