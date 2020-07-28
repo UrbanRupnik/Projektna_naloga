@@ -96,8 +96,8 @@
       <h2> IZGUBIL SI! <br>
        Več sreče prihodnjič! </h2>
     % elif poskus == "R":
-      <h1> NEODLOČENO</h1>
-      <h2> Poskusi še enkrat!</h2>
+      <h2> NEODLOČENO <br>
+       Poskusi še enkrat! </h2>
 
     % elif igra.igralec == True:
 
