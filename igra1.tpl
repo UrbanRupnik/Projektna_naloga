@@ -20,7 +20,7 @@
            color: #fff; border-style: solid; border-width: 4px;}
     .tg .tg-empm{padding: 0px;}
     </style>
-    <table class="tg">
+    <table class="tg" style="table-layout: fixed;">
     <thead>
     <tr>
       <th class="tg-s8il">1</th>

@@ -95,8 +95,16 @@ class Igra:
             return self.skoraj_pos2("O")
         
         else:
-            return random.randint(1, SIRINA)  
+            return self.racunalnik_izbere_prosto_mesto(random.randint(1, SIRINA))
                 
+
+    def racunalnik_izbere_prosto_mesto(self, izbira_stolpca):
+        s = izbira_stolpca - 1
+        if self.plosca[0][s] == " ":
+            return s + 1
+        else:
+            return self.racunalnik_izbere_prosto_mesto(random.randint(1, SIRINA))
+
 
     def skoraj_vod(self, simbol): # vodoravno
         for v in range(VISINA):   # v = vrstica in s = stolpec
