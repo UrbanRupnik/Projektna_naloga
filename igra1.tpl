@@ -104,7 +104,7 @@
 
     <form action="/igra/{{id_igre}}/" method="post" style="padding: 1px;">
       Izbira stolpca: <input type="number" min="1" max="7" name="izbira_stolpca" 
-                             required accesskey="k">
+      required accesskey="k">
       <button type="submit">Izberi</button>
     </form>
 

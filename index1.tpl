@@ -15,14 +15,14 @@
     Ob vaši potezi v okvirček vnesite številko stolpca in kliknite na gumb "Izberi". <br>
     Ob potezi računalnika kliknite na gumb "Klikni".</p>
 
-    <h2 style="padding-left: 38px;">Nasvet:</h2>
-    <p style="padding-left: 38px;">Če vam je konstantno premikanje miške
+    <h2 style="padding-left: 38px; padding-top: 50px;">Nasvet:</h2>
+    <ul style="padding-left: 38px;">Če vam je konstantno premikanje miške
     težavno lahko uporabite bližnjice na tipkovnici:<br>
-    - alt + n = gumb "Nova igra" <br>
-    - alt + k = klik na okvirček za vnos izbire stolpca <br>
-    - enter = potrdi izbiro stolpca <br>
-    - alt + k = gumb "Klikni" ob potezi računalnika <br>
-    (na Mac-u poskusite control + alt).</p>
+      <li> <kbd>alt</kbd> + <kbd>n</kbd> = gumb "Nova igra" </li>
+      <li> <kbd>alt</kbd> + <kbd>k</kbd> = klik na okvirček za vnos izbire stolpca </li>
+      <li> <kbd>enter</kbd> = potrdi izbiro stolpca </li>
+      <li> <kbd>alt</kbd> + <kbd>k</kbd> = gumb "Klikni" ob potezi računalnika </li>
+    (na Mac-u poskusite <kbd>control</kbd> + <kbd>alt</kbd>).</ul>
 
 
   <form action="/igra/" method="post" style="padding-left: 38px;">

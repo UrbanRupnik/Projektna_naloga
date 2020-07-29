@@ -424,4 +424,5 @@ class Stiri:
     def igranje(self, id_igre, izbira_stolpca):
         trenutna_igra, _ = self.igre[id_igre] # dobimo staro igro ven
         novo_stanje = trenutna_igra.igranje(izbira_stolpca) # igramo, dobimo novo stanje
-        self.igre[id_igre] = (trenutna_igra, novo_stanje) # posodbljeno stanje in igro shranimo nazaj v self.igre
+        self.igre[id_igre] = (trenutna_igra, novo_stanje) 
+        # posodbljeno stanje in igro shranimo nazaj v self.igre
