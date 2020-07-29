@@ -41,7 +41,8 @@ class Igra:
         while self.plosca[v][s] != " ":
             v -= 1
             if v < 0:
-                break # potuje od spodaj navzgor in se zlomi ko pride do vrha ali praznega polja
+                break 
+        # potuje od spodaj navzgor in se zlomi ko pride do vrha ali praznega polja
         
         if v < 0:
             return self.plosca # poln stolpec, izbira se enkrat isti igralec
@@ -303,11 +304,11 @@ class Igra:
         return False
 
 
-    def zmaga(self, simbol):
-        return (self.zmaga_vod(simbol) or
-                self.zmaga_nav(simbol) or
-                self.zmaga_pos1(simbol) or
-                self.zmaga_pos2(simbol))
+    def zmaga(self, simbol): 
+        return (self.zmaga_vod(simbol) or  # vodoravno
+                self.zmaga_nav(simbol) or  # navpicno
+                self.zmaga_pos1(simbol) or # posevno \
+                self.zmaga_pos2(simbol))   # posevno /
 
 
     def zmaga_vod(self, simbol):
