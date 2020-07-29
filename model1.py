@@ -209,7 +209,7 @@ class Igra:
                 self.plosca[v][s - 1] != " "):
                 return s
             if (v == 2 and
-                s >= 1 and
+                s <= 3 and
                 self.plosca[v + 3][s + 3] == " "): # prva vrstica
                 return s + 4
             if (v <= 1 and 
