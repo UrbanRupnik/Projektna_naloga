@@ -109,55 +109,76 @@ class Igra:
     def skoraj_vod(self, simbol): # vodoravno
         for v in range(VISINA):   # v = vrstica in s = stolpec
             for s in range(SIRINA - 2):
+                if self.skoraj_vod_3(simbol, v, s) != False:
+                    return self.skoraj_vod_3(simbol, v, s)
 
-                if (self.plosca[v][s] == simbol and # trije znaki skupaj vodoravno
-                    self.plosca[v][s + 1] == simbol and 
-                    self.plosca[v][s + 2] == simbol):
-                    if v == 5: # prva vrstica
-                        if s - 1 >= 0 and self.plosca[v][s - 1] == " ":
-                            return s
-                        if  s + 3 <= 6 and self.plosca[v][s + 3] == " ":
-                            return s + 4
-                    if v <= 4:
-                        if (s - 1 >= 0 and 
-                            self.plosca[v][s - 1] == " " and 
-                            self.plosca[v + 1][s - 1] != " "):
-                            return s
-                        if (s + 3 <= 6 and 
-                            self.plosca[v][s + 3] == " " and 
-                            self.plosca[v + 1][s + 3] != " "):
-                            return s + 4
+                if self.skoraj_vod_1_2(simbol, v, s) != False:
+                    return self.skoraj_vod_1_2(simbol, v, s)
 
-                if (s + 3 <= 6 and   # eno mesto prosto med enim in dvema znakoma (O-OO)
-                    self.plosca[v][s] == simbol and 
-                    self.plosca[v][s + 2] == simbol and 
-                    self.plosca[v][s + 3] == simbol):
-                    if v == 5:
-                        if self.plosca[v][s + 1] == " ":
-                            return s + 2
-                    if v <= 4:
-                        if (self.plosca[v][s + 1] == " " and 
-                            self.plosca[v + 1][s + 1] != " "):
-                            return s + 2
+                if self.skoraj_vod_2_1(simbol, v, s) != False:
+                    return self.skoraj_vod_2_1(simbol, v, s)
+        return False
+    
 
-                if (s + 3 <= 6 and   # eno mesto prosto med dvema in enim znakom (OO-O)
-                    self.plosca[v][s] == simbol and 
-                    self.plosca[v][s + 1] == simbol and 
-                    self.plosca[v][s + 3] == simbol):
-                    if v == 5:
-                        if self.plosca[v][s + 2] == " ":
-                            return s + 3
-                    if v <= 4:
-                        if (self.plosca[v][s + 2] == " " and 
-                        self.plosca[v + 1][s + 2] != " "):
-                            return s + 3
+    def skoraj_vod_3(self, simbol, v, s): # trije znaki skupaj vodoravno
+        if (self.plosca[v][s] == simbol and 
+            self.plosca[v][s + 1] == simbol and 
+            self.plosca[v][s + 2] == simbol):
+            if v == 5: # prva vrstica
+                if s - 1 >= 0 and self.plosca[v][s - 1] == " ":
+                    return s
+                if  s + 3 <= 6 and self.plosca[v][s + 3] == " ":
+                    return s + 4
+                else:
+                    return False
+            if v <= 4:
+                if (s - 1 >= 0 and 
+                    self.plosca[v][s - 1] == " " and 
+                    self.plosca[v + 1][s - 1] != " "):
+                    return s
+                if (s + 3 <= 6 and 
+                    self.plosca[v][s + 3] == " " and 
+                    self.plosca[v + 1][s + 3] != " "):
+                    return s + 4
+        return False
+
+
+    def skoraj_vod_1_2(self, simbol, v, s):
+    # eno mesto prosto med enim in dvema znakoma (O-OO)
+        if (s + 3 <= 6 and   
+            self.plosca[v][s] == simbol and 
+            self.plosca[v][s + 2] == simbol and 
+            self.plosca[v][s + 3] == simbol):
+            if (v == 5 and
+                self.plosca[v][s + 1] == " "):
+                    return s + 2
+            if (v <= 4 and
+                self.plosca[v][s + 1] == " " and 
+                self.plosca[v + 1][s + 1] != " "):
+                return s + 2
+        return False
+
+
+    def skoraj_vod_2_1(self, simbol, v, s):
+    # eno mesto prosto med dvema in enim znakom (OO-O)
+        if (s + 3 <= 6 and
+            self.plosca[v][s] == simbol and 
+            self.plosca[v][s + 1] == simbol and 
+            self.plosca[v][s + 3] == simbol):
+            if (v == 5 and
+                self.plosca[v][s + 2] == " "):
+                return s + 3
+            if (v <= 4 and
+                self.plosca[v][s + 2] == " " and 
+                self.plosca[v + 1][s + 2] != " "):
+                return s + 3
         return False
 
 
     def skoraj_nav(self, simbol):    # navpicno
         for v in range(VISINA - 2):
             for s in range(SIRINA):
-                
+
                 if (self.plosca[v][s] == simbol and 
                     self.plosca[v + 1][s] == simbol and 
                     self.plosca[v + 2][s] == simbol):
@@ -169,98 +190,140 @@ class Igra:
     def skoraj_pos1(self, simbol):    # posevno \
         for v in range(VISINA - 2):
             for s in range(SIRINA - 2):
+                if self.skoraj_pos1_trije(simbol, v, s) != False:
+                    return self.skoraj_pos1_trije(simbol, v, s)
 
-                if (self.plosca[v][s] == simbol and  # trije znaki skupaj \
-                    self.plosca[v + 1][s + 1] == simbol and 
-                    self.plosca[v + 2][s + 2] == simbol):
-                    if (v >= 1 and 
-                        s >= 1 and 
-                        self.plosca[v - 1][s - 1] == " " and 
-                        self.plosca[v][s - 1] != " "):
-                        return s
-                    if (v == 2 and
-                        s >= 1 and
-                        self.plosca[v + 3][s + 3] == " "): # prva vrstica
-                        return s + 4
-                    if (v <= 1 and 
-                        s <= 3 and 
-                        self.plosca[v + 3][s + 3] == " " and 
-                        self.plosca[v + 4][s + 3] != " "):
-                        return s + 4
+                if self.skoraj_pos1_en_dva(simbol, v, s) != False:
+                    return self.skoraj_pos1_en_dva(simbol, v, s)
 
-                if (v + 3 <= 5 and   # eno mesto prosto med enim in dvema znakoma \
-                    s + 3 <= 6 and 
-                    self.plosca[v][s] == simbol and 
-                    self.plosca[v + 2][s + 2] == simbol and 
-                    self.plosca[v + 3][s + 3] == simbol):
-                    if (self.plosca[v + 1][s + 1] == " " and 
-                        self.plosca[v + 2][s + 1] != " "):
-                        return s + 2
-
-                if (v + 3 <= 5 and   # eno mesto prosto med dvema in enim znakom \
-                    s + 3 <= 6 and 
-                    self.plosca[v][s] == simbol and 
-                    self.plosca[v + 1][s + 1] == simbol and 
-                    self.plosca[v + 3][s + 3] == simbol):
-                    if (self.plosca[v + 2][s + 2] == " " and 
-                        self.plosca[v + 3][s + 2] != " "):
-                        return s + 3
+                if self.skoraj_pos1_dva_en(simbol, v, s) != False:
+                    return self.skoraj_pos1_dva_en(simbol, v, s)
         return False
     
+
+    def skoraj_pos1_trije(self, simbol, v, s): # trije znaki skupaj \
+        if (self.plosca[v][s] == simbol and 
+            self.plosca[v + 1][s + 1] == simbol and 
+            self.plosca[v + 2][s + 2] == simbol):
+            if (v >= 1 and 
+                s >= 1 and 
+                self.plosca[v - 1][s - 1] == " " and 
+                self.plosca[v][s - 1] != " "):
+                return s
+            if (v == 2 and
+                s >= 1 and
+                self.plosca[v + 3][s + 3] == " "): # prva vrstica
+                return s + 4
+            if (v <= 1 and 
+                s <= 3 and 
+                self.plosca[v + 3][s + 3] == " " and 
+                self.plosca[v + 4][s + 3] != " "):
+                return s + 4
+        return False
+
+
+    def skoraj_pos1_en_dva(self, simbol, v, s):
+        if (v + 3 <= 5 and   # eno mesto prosto med enim in dvema znakoma \
+            s + 3 <= 6 and 
+            self.plosca[v][s] == simbol and 
+            self.plosca[v + 2][s + 2] == simbol and 
+            self.plosca[v + 3][s + 3] == simbol):
+            if (self.plosca[v + 1][s + 1] == " " and 
+                self.plosca[v + 2][s + 1] != " "):
+                return s + 2
+        return False
+
+
+    def skoraj_pos1_dva_en(self, simbol, v, s):
+        if (v + 3 <= 5 and   # eno mesto prosto med dvema in enim znakom \
+            s + 3 <= 6 and 
+            self.plosca[v][s] == simbol and 
+            self.plosca[v + 1][s + 1] == simbol and 
+            self.plosca[v + 3][s + 3] == simbol):
+            if (self.plosca[v + 2][s + 2] == " " and 
+                self.plosca[v + 3][s + 2] != " "):
+                return s + 3
+        return False
+
 
     def skoraj_pos2(self, simbol):    # posevno /
         for v in range(VISINA - 2):
             for s in reversed(range(SIRINA - 2)):
+                if self.skoraj_pos2_trije(simbol, v, s) != False:
+                    return self.skoraj_pos2_trije(simbol, v, s)
 
-                if (self.plosca[v][s + 2] == simbol and  # trije znaki skupaj /
-                    self.plosca[v + 1][s + 1] == simbol and 
-                    self.plosca[v + 2][s] == simbol):
-                    if (v >= 1 and 
-                        s <= 3 and 
-                        self.plosca[v - 1][s + 3] == " " and 
-                        self.plosca[v][s + 3] != " "):
-                        return s + 4
-                    if (v == 2 and
-                        s >= 1 and
-                        self.plosca[v + 3][s - 1] == " "): # prva vrstica
-                        return s
-                    if (v <= 1 and 
-                        s >= 1 and 
-                        self.plosca[v + 3][s - 1] == " " and 
-                        self.plosca[v + 4][s - 1] != " "):
-                        return s
+                if self.skoraj_pos2_en_dva(simbol, v, s) != False:
+                    return self.skoraj_pos2_en_dva(simbol, v, s)
 
-                if (v + 3 <= 5 and   # eno mesto prosto med enim in dvema znakoma /
-                    s + 3 <= 6 and 
-                    self.plosca[v][s + 3] == simbol and 
-                    self.plosca[v + 2][s + 1] == simbol and 
-                    self.plosca[v + 3][s] == simbol):
-                    if (self.plosca[v + 1][s + 2] == " " and 
-                        self.plosca[v + 2][s + 2] != " "):
-                        return s + 3
+                if self.skoraj_pos2_dva_en(simbol, v, s) != False:
+                    return self.skoraj_pos2_dva_en(simbol, v, s)
+        return False
 
-                if (v + 3 <= 5 and   # eno mesto prosto med dvema in enim znakom /
-                    s + 3 <= 6 and 
-                    self.plosca[v][s + 3] == simbol and 
-                    self.plosca[v + 1][s + 2] == simbol and 
-                    self.plosca[v + 3][s] == simbol):
-                    if (self.plosca[v + 2][s + 1] == " " and 
-                        self.plosca[v + 3][s + 1] != " "):
-                        return s + 2
+
+    def skoraj_pos2_trije(self, simbol, v, s):
+        if (self.plosca[v][s + 2] == simbol and  # trije znaki skupaj /
+            self.plosca[v + 1][s + 1] == simbol and 
+            self.plosca[v + 2][s] == simbol):
+            if (v >= 1 and 
+                s <= 3 and 
+                self.plosca[v - 1][s + 3] == " " and 
+                self.plosca[v][s + 3] != " "):
+                return s + 4
+            if (v == 2 and
+                s >= 1 and
+                self.plosca[v + 3][s - 1] == " "): # prva vrstica
+                return s
+            if (v <= 1 and 
+                s >= 1 and 
+                self.plosca[v + 3][s - 1] == " " and 
+                self.plosca[v + 4][s - 1] != " "):
+                return s
+        return False
+
+
+    def skoraj_pos2_en_dva(self, simbol, v, s):
+        if (v + 3 <= 5 and   # eno mesto prosto med enim in dvema znakoma /
+            s + 3 <= 6 and 
+            self.plosca[v][s + 3] == simbol and 
+            self.plosca[v + 2][s + 1] == simbol and 
+            self.plosca[v + 3][s] == simbol):
+            if (self.plosca[v + 1][s + 2] == " " and 
+                self.plosca[v + 2][s + 2] != " "):
+                return s + 3
+        return False
+
+
+    def skoraj_pos2_dva_en(self, simbol, v, s):
+        if (v + 3 <= 5 and   # eno mesto prosto med dvema in enim znakom /
+            s + 3 <= 6 and 
+            self.plosca[v][s + 3] == simbol and 
+            self.plosca[v + 1][s + 2] == simbol and 
+            self.plosca[v + 3][s] == simbol):
+            if (self.plosca[v + 2][s + 1] == " " and 
+                self.plosca[v + 3][s + 1] != " "):
+                return s + 2
         return False
 
 
     def zmaga(self, simbol):
-        # vodoravno
-        for v in range(VISINA):      # v = vrstica in s = stolpec
+        return (self.zmaga_vod(simbol) or
+                self.zmaga_nav(simbol) or
+                self.zmaga_pos1(simbol) or
+                self.zmaga_pos2(simbol))
+
+
+    def zmaga_vod(self, simbol):
+        for v in range(VISINA):    
             for s in range(SIRINA - 3):
                 if (self.plosca[v][s] == simbol and 
                     self.plosca[v][s + 1] == simbol and 
                     self.plosca[v][s + 2] == simbol and 
                     self.plosca[v][s + 3] == simbol):
                     return True
+        return False
 
-        # navpicno
+
+    def zmaga_nav(self, simbol):
         for v in range(VISINA - 3):
             for s in range(SIRINA):
                 if (self.plosca[v][s] == simbol and 
@@ -268,8 +331,10 @@ class Igra:
                     self.plosca[v + 2][s] == simbol and 
                     self.plosca[v + 3][s] == simbol):
                     return True
+        return False
 
-        # posevno \
+
+    def zmaga_pos1(self, simbol): # posevno \
         for v in range(VISINA - 3):
             for s in range(SIRINA - 3):
                 if (self.plosca[v][s] == simbol and 
@@ -277,8 +342,10 @@ class Igra:
                     self.plosca[v + 2][s + 2] == simbol and 
                     self.plosca[v + 3][s + 3] == simbol):
                     return True
+        return False
 
-        # posevno /
+
+    def zmaga_pos2(self, simbol): # posevno /                
         for v in range(VISINA - 3):
             for s in reversed(range(SIRINA - 3)):
                 if (self.plosca[v][s + 3] == simbol and 
@@ -286,7 +353,6 @@ class Igra:
                     self.plosca[v + 2][s + 1] == simbol and 
                     self.plosca[v + 3][s] == simbol):
                     return True
-
         return False
 
 
