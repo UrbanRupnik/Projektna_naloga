@@ -129,8 +129,6 @@ class Igra:
                     return s
                 if  s + 3 <= 6 and self.plosca[v][s + 3] == " ":
                     return s + 4
-                else:
-                    return False
             if v <= 4:
                 if (s - 1 >= 0 and 
                     self.plosca[v][s - 1] == " " and 
