@@ -71,33 +71,32 @@ class Igra:
 
 
     def poteza_racunalnika(self):
-        if self.skoraj_vod("X") != False:
-            return self.skoraj_vod("X") # vrne stevilko stolpca
-
-        elif self.skoraj_nav("X") != False:
-            return self.skoraj_nav("X")
-
-        elif self.skoraj_pos1("X") != False:
-            return self.skoraj_pos1("X")
-            
-        elif self.skoraj_pos2("X") != False:
-            return self.skoraj_pos2("X")
-
-        elif self.skoraj_vod("O") != False:
-            return self.skoraj_vod("O")
-
-        elif self.skoraj_nav("O") != False:
-            return self.skoraj_nav("O")
-
-        elif self.skoraj_pos1("O") != False:
-            return self.skoraj_pos1("O")
-            
-        elif self.skoraj_pos2("O") != False:
-            return self.skoraj_pos2("O")
+        if self.skoraj_zmaga("X") != False:
+            return self.skoraj_zmaga("X")
+        
+        if self.skoraj_zmaga("O") != False:
+            return self.skoraj_zmaga("O")        
         
         else:
             return self.racunalnik_izbere_prosto_mesto(random.randint(1, SIRINA))
                 
+
+    def skoraj_zmaga(self, simbol):
+        if self.skoraj_vod(simbol) != False:
+            return self.skoraj_vod(simbol) # vrne stevilko stolpca
+
+        elif self.skoraj_nav(simbol) != False:
+            return self.skoraj_nav(simbol)
+
+        elif self.skoraj_pos1(simbol) != False:
+            return self.skoraj_pos1(simbol)
+            
+        elif self.skoraj_pos2(simbol) != False:
+            return self.skoraj_pos2(simbol)
+        
+        else:
+            return False     
+
 
     def racunalnik_izbere_prosto_mesto(self, izbira_stolpca):
         s = izbira_stolpca - 1
