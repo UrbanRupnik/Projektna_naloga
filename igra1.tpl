@@ -10,7 +10,7 @@
 
 
     <style type="text/css">
-    .tg  {width: 70%; height: 60%; table-layout: fixed; text-align: center;
+    .tg  {width: 75%; height: 60%; table-layout: fixed; text-align: center;
           border-collapse: collapse; border-color: #9ABAD9;
           border-spacing: 0; font-size: 14px; border-style: solid;
           border-width: 4px; word-break: normal;}
@@ -42,6 +42,7 @@
       <td class="tg-jq8f">{{igra.narisi_vrstico(0)[4]}}</td>
       <td class="tg-jq8f">{{igra.narisi_vrstico(0)[5]}}</td>
       <td class="tg-jq8f">{{igra.narisi_vrstico(0)[6]}}</td>
+      <td class="tg-jq8f" style="visibility: hidden;">/</td>
     </tr>
     <tr>
       <td class="tg-s8il">{{igra.narisi_vrstico(1)[0]}}</td>
@@ -51,6 +52,7 @@
       <td class="tg-jq8f">{{igra.narisi_vrstico(1)[4]}}</td>
       <td class="tg-jq8f">{{igra.narisi_vrstico(1)[5]}}</td>
       <td class="tg-jq8f">{{igra.narisi_vrstico(1)[6]}}</td>
+      <td class="tg-jq8f" style="visibility: hidden;">/</td>
     </tr>
     <tr>
       <td class="tg-s8il">{{igra.narisi_vrstico(2)[0]}}</td>
@@ -60,6 +62,7 @@
       <td class="tg-jq8f">{{igra.narisi_vrstico(2)[4]}}</td>
       <td class="tg-jq8f">{{igra.narisi_vrstico(2)[5]}}</td>
       <td class="tg-jq8f">{{igra.narisi_vrstico(2)[6]}}</td>
+      <td class="tg-jq8f" style="visibility: hidden;">/</td>
     </tr>
     <tr>
       <td class="tg-s8il">{{igra.narisi_vrstico(3)[0]}}</td>
@@ -69,6 +72,7 @@
       <td class="tg-jq8f">{{igra.narisi_vrstico(3)[4]}}</td>
       <td class="tg-jq8f">{{igra.narisi_vrstico(3)[5]}}</td>
       <td class="tg-jq8f">{{igra.narisi_vrstico(3)[6]}}</td>
+      <td class="tg-jq8f" style="visibility: hidden;">/</td>
     </tr>
     <tr>
       <td class="tg-s8il">{{igra.narisi_vrstico(4)[0]}}</td>
@@ -78,6 +82,7 @@
       <td class="tg-jq8f">{{igra.narisi_vrstico(4)[4]}}</td>
       <td class="tg-jq8f">{{igra.narisi_vrstico(4)[5]}}</td>
       <td class="tg-jq8f">{{igra.narisi_vrstico(4)[6]}}</td>
+      <td class="tg-jq8f" style="visibility: hidden;">/</td>
     </tr>
     <tr>
       <td class="tg-s8il">{{igra.narisi_vrstico(5)[0]}}</td>
@@ -87,6 +92,7 @@
       <td class="tg-jq8f">{{igra.narisi_vrstico(5)[4]}}</td>
       <td class="tg-jq8f">{{igra.narisi_vrstico(5)[5]}}</td>
       <td class="tg-jq8f">{{igra.narisi_vrstico(5)[6]}}</td>
+      <td class="tg-jq8f" style="visibility: hidden;">/</td>
     </tr>
     </tbody>
     </table>
